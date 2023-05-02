@@ -40,9 +40,10 @@ const PromptsBody = styled.div`
 
   .prompts-history {
     background-color: #fff;
-    max-height: 72vh;
     margin-bottom: 10px;
+    max-height: 72vh;
     overflow-y: scroll;
+    position: relative;
     scroll-behavior: smooth;
     scrollbar-width: none;
     width: 100%;
@@ -70,8 +71,7 @@ const Dialog = forwardRef(() => {
 
   // scroll to the bottom when stripes change
   useEffect(() => {
-    console.log("stripes changed")
-    handleMoveLoaderToBottom(chatRef, loaderRef)
+    handleMoveLoaderToBottom()
   }, [stripes])
 
   return (
@@ -79,9 +79,10 @@ const Dialog = forwardRef(() => {
       <Title>HealthBot</Title>
       <PromptsBody>
         {isFirstQuestion && <Welcome />}
-        {isLoading && <Loader ref={loaderRef} />}
+        {/* {<Loader ref={loaderRef} />} */}
         {!isFirstQuestion && (
           <div ref={chatRef} className="prompts-history">
+            {isLoading && <Loader ref={loaderRef} />}
             {stripes.map((stripe, index) => {
               const { isAi, value, botMessageId } = stripe
               return (

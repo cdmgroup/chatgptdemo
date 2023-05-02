@@ -2,9 +2,10 @@ import React, { forwardRef } from "react"
 import styled from "styled-components"
 
 const Spinner = styled.div`
+  bottom: 0;
   display: block;
   height: 36px;
-  left: 74px;
+  left: 62px;
   overflow: hidden;
   position: absolute;
   transform: translateZ(1px);

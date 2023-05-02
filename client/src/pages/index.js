@@ -8,10 +8,6 @@ import PromptsMobile from "../components/PromptsMobile"
 import Dialog from "../components/Dialog"
 
 const IndexPage = () => {
-  // const handleMobilePrompts = () => {
-  //   console.log("handleMobilePrompts")
-  // }
-
   return (
     <AppContextProvider>
       <div id="app">

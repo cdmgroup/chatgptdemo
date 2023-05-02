@@ -94,6 +94,33 @@ export const AppContextProvider = ({ children }) => {
     setInputValue(textareaRef.current.value)
   }
 
+  // we are looking for a way to limit chatgpt to get
+  // information from a list of files or others single sources
+  // of true like an API. This is the approximation in which
+  // we have thought if we are dealing with files:
+  //
+  // --------------------------------- //
+  // read data from files with fs and return it
+  // const readData = () => {
+  //   const fs = require("fs")
+  //   const files = ["file1.txt", "file2.txt", "file3.txt"]
+  //   let data = ""
+  //   for (let i = 0; i < files.length; i++) {
+  //     fs.readFile(files[i], "utf8", (err, data) => {
+  //       if (err) throw err
+  //       console.log(data)
+  //       // Send data to OpenAI API for processing
+  //     })
+  //   }
+  //   return data
+  // }
+  // ---------------------------------
+  //
+  // body: JSON.stringify({
+  //   prompt: 'Generate information based on: '+ data + inputValue,
+  // }),
+  // --------------------------------- //
+
   const handleUserInput = async () => {
     try {
       const response = await fetch("http://localhost:5001/", {
@@ -172,7 +199,7 @@ export const AppContextProvider = ({ children }) => {
     }
   }
 
-  const handleMoveLoaderToBottom = (chatRef, loaderRef) => {
+  const handleMoveLoaderToBottom = () => {
     if (!chatRef) {
       return
     }
@@ -187,8 +214,7 @@ export const AppContextProvider = ({ children }) => {
 
       // move the loader to the bottom of prompts-history when stripes change
       if (LoaderRef) {
-        LoaderRef.style.top = `${ChatRef.scrollHeight - 38}px`
-        console.log("moved")
+        LoaderRef.style.top = `${ChatRef.scrollHeight - 48}px`
       }
     }
   }
